@@ -2,9 +2,12 @@
 ![alt text](https://cdn.discordapp.com/attachments/761256129191477261/796081640773648384/Ten_4.jpg)
 
 
-##CodenBot
-###Developed by Abraham/CodeProductions, this simple bot was coded with discord.py. This bot is a multi-purpose bot used for administration and chat moderation.
-Documentation and Issues
+## CodenBot
+
+### Developed by Abraham/CodeProductions, this simple bot was coded with discord.py.
+This bot is a multi-purpose bot used for administration and chat moderation.
+
+### Documentation and Issues
 If you run into any issues, please go to the following github:
 https://github.com/Rezatachi
 
@@ -28,5 +31,6 @@ Command and Intents
 
 > kick- kicks a member from the server.
 
+### Continously adding more commands..
 
 
