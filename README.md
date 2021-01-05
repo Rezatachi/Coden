@@ -11,8 +11,7 @@ This bot is a multi-purpose bot used for administration and chat moderation.
 If you run into any issues, please go to the following github:
 https://github.com/Rezatachi
 
-To use this bot and all its abilites, connect it via this Discord Link.
-https://discord.com/api/oauth2/authorize?client_id=785943693244760094&permissions=0&scope=bot
+To use this bot and all its abilites, connect it via this Discord [Link](https://discord.com/api/oauth2/authorize?client_id=785943693244760094&permissions=0&scope=bot)
 
 This Embed contains the list of commands for Coden.
 
