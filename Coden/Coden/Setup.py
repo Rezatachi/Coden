@@ -84,7 +84,7 @@ async def ban(message, member : discord.Member, *, reason=None):
 
     
 
-client.run('Nzg1OTQzNjkzMjQ0NzYwMDk0.X8_NGg.1fKGMBpLXwUjoKMcBlqMYYLtMZo')
+client.run('#AUTHENTICATION KEY HERE#)
 
 
 
