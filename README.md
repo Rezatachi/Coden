@@ -1,5 +1,5 @@
 # Coden
-![alt text](https://cdn.discordapp.com/attachments/761256129191477261/796081508959256636/Ten_3.jpg)
+![alt text](https://cdn.discordapp.com/attachments/761256129191477261/796081640773648384/Ten_4.jpg)
 CodenBot
 Developed by Abraham/CodeProductions, this simple bot was coded with discord.py. This bot is a multi-purpose bot used for administration and chat moderation.
 Documentation and Issues
