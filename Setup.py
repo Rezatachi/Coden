@@ -219,7 +219,7 @@ async def creator(ctx):
 
     
 
-client.run('Nzg1OTQzNjkzMjQ0NzYwMDk0.X8_NGg.1fKGMBpLXwUjoKMcBlqMYYLtMZo')
+client.run('')
 
 
 
