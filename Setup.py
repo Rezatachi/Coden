@@ -1,9 +1,13 @@
 import discord
 import random
 import asyncio
+import youtube_dl
 from discord.ext import commands,tasks
+from discord.utils import get
+from discord import FFmpegPCMAudio
 from discord.ext.commands import Bot, has_permissions, CheckFailure
 from itertools import cycle
+from youtube_dl import YoutubeDL
 import os
 
 client = commands.Bot(command_prefix = ']')
@@ -60,8 +64,7 @@ async def ping(ctx):
 # Creates a 8ball minigame with a range of responses from the bot
 @client.command(aliases = ['8ball', 'eightball'])
 async def _8ball(ctx, *, question):
-     responses = ['It is certain.',
- 'For sure', 'without a doubt', 'Yes definitely', 'Chances are low', 'Wouldnt count on it.', 'Nope', 'Try again', 'Think hard and try again', 'Go away before I eat your cat', 'I thought too hard and died.']
+     responses = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes – definitely', 'You may rely on it', 'As I see it, yes', 'Most likely', 'Outlook good', 'Yes Signs point to yes', 'Reply hazy', 'try again', 'Ask again later', 'Better not tell you now', 'Cannot predict now', 'Concentrate and ask again', 'Dont count on it', 'My reply is no', 'My sources say no', 'Outlook not so good', 'Very doubtful']
      await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 # Info Embed, used for displaying information
@@ -116,6 +119,91 @@ async def ban(message, member : discord.Member, *, reason=None):
     botembedvar = await message.channel.send(embed=embedVar2)
     await asyncio.sleep(2)
     await botembedvar.delete()
+
+# Leave
+@client.command()
+async def stop(ctx):
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild=ctx.guild)
+
+    if voice and voice.is_connected():
+        await voice.disconnect()
+        embedLeave = discord.Embed(title=f'**Bot left {channel}**')
+        botLeave = await ctx.channel.send(embed=embedLeave)
+        await asyncio.sleep(2)
+        await botLeave.delete()
+
+    else:
+        print("Bot was told to leave voice channel, but was not in one")
+        await ctx.send("Don't think I am in a voice channel")
+
+
+# Play
+@client.command()
+async def play(ctx, url: str):
+    if ctx.author.voice and ctx.author.voice.channel:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+    else:
+        await ctx.send("You are not connected to a voice channel.")
+    #Checking to see if a song file is in our directory. If the song is in the same directory, it will se it to true.
+    song_there = os.path.isfile("song.mp3")
+    # Attempts to try this if statement, it won't stop the code but it attempts to see if any errors will be detected
+    try:
+        if song_there:
+            os.remove("song.mp3")
+            print("Removed old song file")
+    # Permission denied error will show the following print statement
+    except PermissionError:
+        print("Trying to delete song file, but it's being played")
+        await ctx.send("ERROR: Music playing")
+        return
+    # Loads the following try command^
+    load = await ctx.send("Getting everything ready now")
+    await asyncio.sleep(2)
+    await load.delete()
+    # Getting the voice variables, getting bot's voiceclient from pythonNacl
+    voice = get(client.voice_clients, guild=ctx.guild)
+    # Youtube download options, this for how you'll extract the mp3 from the youtube url
+    ydl_opts = {
+        # Getting the best audio you can get
+        'format': 'bestaudio/best',
+        # ffmpeg work, using it to extract the mp3.
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    # This 'with' statement. Setting the variable options and passing them into here. Makes youtube_dl.YoutubeDL(ydl_opts) into just ydl
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        print("Downloading audio now\n")
+        ydl.download([url])
+
+    for file in os.listdir("./"):
+        if file.endswith(".mp3"):
+            name = file
+            print(f"Renamed File: {file}\n")
+            os.rename(file, "song.mp3")
+    # Play Audio
+    voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print("Song done!"))
+    # Sets audio of the bot
+    voice.source = discord.PCMVolumeTransformer(voice.source)
+    voice.source.volume = 0.07
+    
+
+    nname = name.rsplit("-", 2)
+    await ctx.send(f"Playing: {nname[0]}")
+    print("playing\n")
+
+#Creator Command
+def is_it_me(ctx):
+    return ctx.author.id == 261343342716125184
+
+@client.command()
+@commands.check(is_it_me)
+async def creator(ctx):
+    await ctx.send("**Hello Code**")
 
     
 
