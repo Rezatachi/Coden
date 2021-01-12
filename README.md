@@ -20,15 +20,25 @@ Command and Intents
 
 > commands - displays the help embed displaying the various commands
 
+> ping - shows the bot's current ping
+
 > info - shows the bot information
 
 > clear auto purges messages up to 10
 
 > 8ball - fun minigame to test your luck
 
-> ban- bans are member from the discord server
+> ban - bans are member from the discord server
 
-> kick- kicks a member from the server.
+> kick - kicks a member from the server.
+
+> load [command] - loads extra commands from test.py
+
+> play - playing music from youtube URL
+
+> leave - stops the music from the bot
+
+>Upcoming commands: queue, pause, skip
 
 ### Continously adding more commands....
 

@@ -224,7 +224,7 @@ async def resume(ctx):
         print("Music is not paused")
         await ctx.send("Music is not paused")
 
-client.run('Nzg1OTQzNjkzMjQ0NzYwMDk0.X8_NGg.1fKGMBpLXwUjoKMcBlqMYYLtMZo')
+client.run('')
 
 
 
