@@ -141,11 +141,6 @@ async def stop(ctx):
 # Play
 @client.command()
 async def play(ctx, url: str):
-    if ctx.author.voice and ctx.author.voice.channel:
-        channel = ctx.author.voice.channel
-        await channel.connect()
-    else:
-        await ctx.send("You are not connected to a voice channel.")
     #Checking to see if a song file is in our directory. If the song is in the same directory, it will se it to true.
     song_there = os.path.isfile("song.mp3")
     # Attempts to try this if statement, it won't stop the code but it attempts to see if any errors will be detected
@@ -159,9 +154,14 @@ async def play(ctx, url: str):
         await ctx.send("ERROR: Music playing")
         return
     # Loads the following try command^
-    load = await ctx.send("Getting everything ready now")
+    load = await ctx.send("`Getting everything ready now`")
     await asyncio.sleep(2)
     await load.delete()
+    if ctx.author.voice and ctx.author.voice.channel:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+    else:
+        await ctx.send("You are not connected to a voice channel.")   
     # Getting the voice variables, getting bot's voiceclient from pythonNacl
     voice = get(client.voice_clients, guild=ctx.guild)
     # Youtube download options, this for how you'll extract the mp3 from the youtube url
@@ -195,29 +195,34 @@ async def play(ctx, url: str):
     nname = name.rsplit("-", 2)
     await ctx.send(f"Playing: {nname[0]}")
     print("playing\n")
+    return
 
-#Creator Command
-def is_it_me(ctx):
-    return ctx.author.id == 261343342716125184
+@client.command(pass_context=True, aliases=['pa', 'pau'])
+async def pause(ctx):
 
-@client.command()
-@commands.check(is_it_me)
-async def creator(ctx):
-    await ctx.send("**Hello Code**")
+    voice = get(client.voice_clients, guild=ctx.guild)
 
-    
-
-
-            
-      
-
+    if voice and voice.is_playing():
+        print("Music paused")
+        voice.pause()
+        await ctx.send("Music paused")
+    else:
+        print("Music not playing failed pause")
+        await ctx.send("Music not playing failed pause")
 
 
+@client.command(pass_context=True, aliases=['r', 'res'])
+async def resume(ctx):
 
+    voice = get(client.voice_clients, guild=ctx.guild)
 
- 
-
-    
+    if voice and voice.is_paused():
+        print("Resumed music")
+        voice.resume()
+        await ctx.send("Resumed music")
+    else:
+        print("Music is not paused")
+        await ctx.send("Music is not paused")
 
 client.run('Nzg1OTQzNjkzMjQ0NzYwMDk0.X8_NGg.1fKGMBpLXwUjoKMcBlqMYYLtMZo')
 
