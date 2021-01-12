@@ -36,7 +36,7 @@ Command and Intents
 
 > play - playing music from youtube URL
 
-> stop - stops the music from the bot
+> leave - stops the music from the bot
 
 >Upcoming commands: queue, pause, skip
 
