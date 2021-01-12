@@ -34,11 +34,11 @@ Command and Intents
 
 > load [command] - loads extra commands from test.py
 
-> play - playing music from youtube URL (Currently working on this more)
+> play - playing music from youtube URL
 
 > stop - stops the music from the bot
 
-
+>Upcoming commands: queue, pause, skip
 
 ### Continously adding more commands....
 
