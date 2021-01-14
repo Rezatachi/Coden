@@ -1,5 +1,5 @@
 # Coden
-![alt text](https://cdn.discordapp.com/attachments/761256129191477261/796081640773648384/Ten_4.jpg)
+![alt text](https://cdn.discordapp.com/attachments/761256129191477261/796081508959256636/Ten_3.jpg)
 
 
 ## CodenBot
