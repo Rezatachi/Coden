@@ -121,7 +121,7 @@ async def ban(message, member : discord.Member, *, reason=None):
     await botembedvar.delete()
 
 
-client.run('Nzg1OTQzNjkzMjQ0NzYwMDk0.X8_NGg.TkI3CFcSHWygG-dLeP3cntnvpEc')
+client.run('YOUR TOKEN HERE')
 
 
 
