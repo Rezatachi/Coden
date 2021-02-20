@@ -79,7 +79,7 @@ async def info(message):
 @client.command(aliases = ['commands'])
 async def ask(message):
     embedHelp = discord.Embed(title="This Embed contains the list of commands for Coden.", description="This bot uses the prefix `]`",color=0x8919cf)
-    embedHelp.add_field(name = "Command and Intents", value= "`commands` - displays the help embed displaying the various commands\n  `info` - shows the bot information \n `clear` auto purges messages up to 10 \n `8ball` - fun minigame to test your luck\n  `ban`- bans are member from the discord server\n  `kick`- kicks a member from the server.")
+    embedHelp.add_field(name = "Command and Intents", value= "`commands` - displays the help embed displaying the various commands\n  `info` - shows the bot information \n `clear` auto purges messages up to 10 \n `8ball` - fun minigame to test your luck\n  `ban`- bans are member from the discord server\n  `kick`- kicks a member from the server.\n `load` - loads extra commands from cogs \n `play` - playing music from youtube URL \n `leave` - bot leaves the voice channel \n `stop` - music stops playing \n `resume` - music resumes \n `pause` - music is paused. ")
     embedHelp.set_thumbnail(url="https://cdn.discordapp.com/attachments/761256129191477261/779902108920709141/Ten.jpg")
     await message.channel.send(embed=embedHelp)
    
@@ -115,13 +115,14 @@ async def kick(message, member : discord.Member, *, reason=None):
 @commands.has_permissions(ban_members=True)
 async def ban(message, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
-    embedVar2 = discord.Embed(title="**User banned!**", color=0x8919cf)
-    botembedvar = await message.channel.send(embed=embedVar2)
+    embedVar3 = discord.Embed(title="**User banned!**", color=0x8919cf)
+    botembedvar = await message.channel.send(embed=embedVar3)
     await asyncio.sleep(2)
     await botembedvar.delete()
+    
 
 
-
+client.run('Nzg1OTQzNjkzMjQ0NzYwMDk0.X8_NGg.ZTW0eKjaUbv7SalEaTZJSA4EdNM')
 
 
 
