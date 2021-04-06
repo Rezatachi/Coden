@@ -18,7 +18,31 @@ class music(commands.Cog):
         self.client = client
 
     # Leave
-        @client.command()
+        @client.command(pass_context=True, aliases=['r', 'res'])
+        async def resume(ctx):
+
+            voice = get(client.voice_clients, guild=ctx.guild)
+
+            if voice and voice.is_paused():
+                print("Resumed music")
+                voice.resume()
+                await ctx.send("Resumed music")
+            else:
+                print("Music is not paused")
+                await ctx.send("Music is not paused")
+
+        @client.command(pass_context=True, aliases=['pa', 'pau'])
+        async def pause(ctx):
+
+            voice = get(client.voice_clients, guild=ctx.guild)
+
+            if voice and voice.is_playing():
+                print("Music paused")
+                voice.pause()
+                await ctx.send("Music paused")
+            else:
+                print("Music not playing failed pause")
+                await ctx.send("Music not playing failed pause")@client.command()
         async def stop(ctx):
             channel = ctx.message.author.voice.channel
             voice = get(client.voice_clients, guild=ctx.guild)
@@ -33,6 +57,7 @@ class music(commands.Cog):
             else:
                 print("Bot was told to leave voice channel, but was not in one")
                 await ctx.send("Don't think I am in a voice channel")
+                
         @client.command()
         async def join(ctx):
             if ctx.author.voice and ctx.author.voice.channel:
@@ -88,30 +113,6 @@ class music(commands.Cog):
       
 
 
-        @client.command(pass_context=True, aliases=['r', 'res'])
-        async def resume(ctx):
-
-            voice = get(client.voice_clients, guild=ctx.guild)
-
-            if voice and voice.is_paused():
-                print("Resumed music")
-                voice.resume()
-                await ctx.send("Resumed music")
-            else:
-                print("Music is not paused")
-                await ctx.send("Music is not paused")
-
-        @client.command(pass_context=True, aliases=['pa', 'pau'])
-        async def pause(ctx):
-
-            voice = get(client.voice_clients, guild=ctx.guild)
-
-            if voice and voice.is_playing():
-                print("Music paused")
-                voice.pause()
-                await ctx.send("Music paused")
-            else:
-                print("Music not playing failed pause")
-                await ctx.send("Music not playing failed pause")
+        
 def setup(client):
     client.add_cog(music(client))
