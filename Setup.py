@@ -152,7 +152,7 @@ async def ban(message, member: discord.Member, *, reason=None):
     await member.ban(reason=reason)
     embedVar3 = discord.Embed(title="**User banned!**", color=0x8919cf)
     botembedvar = await message.channel.send(embed=embedVar3)
-    await asyncio.sleep(2)
+    await asyncio.sleep(3)
     await botembedvar.delete()
 
 
