@@ -19,4 +19,6 @@ node_modules
 #Getting Rid
 song.mp3
 
+#.env
+.env
 
