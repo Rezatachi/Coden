@@ -9,9 +9,11 @@ from discord.ext.commands import Bot, has_permissions, CheckFailure
 from itertools import cycle
 from youtube_dl import YoutubeDL
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+load_dotenv(find_dotenv())
+
+KEY = os.environ.get("KEY")
 
 MY_TOKEN_HERE = os.getenv('MY_TOKEN_HERE')
 client = commands.Bot(command_prefix=']')
@@ -156,4 +158,4 @@ async def ban(message, member: discord.Member, *, reason=None):
     await botembedvar.delete()
 
 
-client.run(MY_TOKEN_HERE)
+client.run(KEY)
