@@ -4,13 +4,14 @@ import discord
 import random
 import asyncio
 import youtube_dl
-from discord.ext import commands,tasks
+from discord.ext import commands, tasks
 from discord.utils import get
 from discord import FFmpegPCMAudio
 from discord.ext.commands import Bot, has_permissions, CheckFailure
 from itertools import cycle
 from youtube_dl import YoutubeDL
 import os
+
 
 class music(commands.Cog):
 
@@ -43,6 +44,7 @@ class music(commands.Cog):
             else:
                 print("Music not playing failed pause")
                 await ctx.send("Music not playing failed pause")@client.command()
+
         async def stop(ctx):
             channel = ctx.message.author.voice.channel
             voice = get(client.voice_clients, guild=ctx.guild)
@@ -57,20 +59,20 @@ class music(commands.Cog):
             else:
                 print("Bot was told to leave voice channel, but was not in one")
                 await ctx.send("Don't think I am in a voice channel")
-                
+
         @client.command()
         async def join(ctx):
             if ctx.author.voice and ctx.author.voice.channel:
                 channel = ctx.author.voice.channel
-                await channel.connect()   
+                await channel.connect()
 
         # Play
         @client.command()
-        async def play(ctx, url: str):  
+        async def play(ctx, url: str):
             def is_connected(ctx):
-                
-             voice_client = get(ctx.bot.voice_clients, guild=ctx.guild)
-             return voice_client and voice_client.is_connected()
+
+                voice_client = get(ctx.bot.voice_clients, guild=ctx.guild)
+                return voice_client and voice_client.is_connected()
             song_there = os.path.isfile("song.mp3")
             try:
                 if song_there:
@@ -83,7 +85,7 @@ class music(commands.Cog):
             await asyncio.sleep(2)
             await load.delete()
             if not is_connected(ctx):
-                await ctx.send(" do `]join` to connect Coden into the voice channel first.")   
+                await ctx.send(" do `]join` to connect Coden into the voice channel first.")
             voice = get(client.voice_clients, guild=ctx.guild)
             ydl_opts = {
                 'format': 'bestaudio/best',
@@ -102,7 +104,8 @@ class music(commands.Cog):
                     name = file
                     print(f"Renamed File: {file}\n")
                     os.rename(file, "song.mp3")
-            voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print("Song done!"))
+            voice.play(discord.FFmpegPCMAudio("song.mp3"),
+                       after=lambda e: print("Song done!"))
             voice.source = discord.PCMVolumeTransformer(voice.source)
             voice.source.volume = 0.07
             nname = name.rsplit("-", 2)
@@ -110,9 +113,6 @@ class music(commands.Cog):
             print("playing\n")
         return
 
-      
 
-
-        
 def setup(client):
     client.add_cog(music(client))

@@ -18,9 +18,13 @@ KEY = os.environ.get("KEY")
 MY_TOKEN_HERE = os.getenv('MY_TOKEN_HERE')
 client = commands.Bot(command_prefix=']')
 status = cycle(['NODES', 'MODULES', 'WAVES'])
-
-
+mangalist = cycle(['Vinland saga', 'One piece',
+                  'Fire force', 'Steel ball run'])
+linklist = ['https://myanimelist.net/manga/642/Vinland_Saga', 'https://myanimelist.net/manga/13/One_Piece',
+            'https://myanimelist.net/manga/91037/Enen_no_Shouboutai?q=fire%20force&cat=manga', 'https://myanimelist.net/manga/1706/JoJo_no_Kimyou_na_Bouken_Part_7__Steel_Ball_Run']
 # Initalizes the bot and gives it a status
+
+
 @client.event
 async def on_ready():
     change_status.start()
@@ -29,7 +33,7 @@ async def on_ready():
 # Backgrounds tasks for the Discord Bot ()
 
 
-@tasks.loop(seconds=100000)
+@tasks.loop(seconds=10)
 async def change_status():
     await client.change_presence(activity=discord.Game(next(status)))
 
@@ -158,4 +162,22 @@ async def ban(message, member: discord.Member, *, reason=None):
     await botembedvar.delete()
 
 
+@client.command()
+async def github(ctx):
+    await ctx.send("https://github.com/Rezatachi")
+
+
+@client.command()
+async def linktree(ctx):
+    await ctx.send("https://linktr.ee/CodeProd")
+
+
+@client.command()
+async def reading(ctx):
+    embed = discord.Embed(
+        title=f"**Abe is currently reading {next(mangalist)}**")
+    embed.set_footer(text="by Makoto Yukimura")
+    embed.set_image(
+        url="https://images-na.ssl-images-amazon.com/images/I/91+Qs9DaFZL.jpg")
+    await ctx.send(embed=embed)
 client.run(KEY)
